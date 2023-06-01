@@ -3,6 +3,7 @@
 media/
 static/
 .env
+frontend/next.config.js
 
 # Ignore compiled Python files
 __pycache__/

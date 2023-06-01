@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 
 import moment from 'moment';
-// import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
 
-// mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
+mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 
 const JobDetails = ({ job, candidates }) => {
     
@@ -14,17 +14,17 @@ const JobDetails = ({ job, candidates }) => {
 
     //  Create a map and set the center point
           
-    // useEffect(() => {
-    //   const map = new mapboxgl.Map({
-    //     container: 'job-map',
-    //     style: 'mapbox://styles/mapbox/streets-v11',
-    //     center: coordinates,
-    //     zoom: 11
-    //   });
+    useEffect(() => {
+      const map = new mapboxgl.Map({
+        container: 'job-map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: coordinates,
+        zoom: 11
+      });
 
-    //   // Add marker on the map
-    //   new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
-    // }, []);
+      // Add marker on the map
+      new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
+    }, []);
 
   return (
     <div className="job-details-wrapper">
