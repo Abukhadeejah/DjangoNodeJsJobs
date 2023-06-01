@@ -5,11 +5,11 @@ import Script from 'next/script';
 import Header from './Header';
 import Footer from './Footer';
 
-const Layout = ({ children, title = 'AppopoleisJobs - Where Jobs Find You' }) => {
+const Layout = ({ children, title = 'Where Jobs Find You' }) => {
   return (
     <div>
         <Head>
-            <title>{title}</title>
+            <title>{title} - AppopoleisJobs</title>
             <link
                 rel="stylesheet"
                 href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
