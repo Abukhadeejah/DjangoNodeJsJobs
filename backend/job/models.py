@@ -49,7 +49,7 @@ def return_date_time():
 
 class Job(models.Model):
     title = models.CharField(max_length=200, null=True, blank=True)
-    description = models.TextField(max_length=200, null=True, blank=True)
+    description = models.TextField(max_length=2000, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
     jobType = models.CharField(
