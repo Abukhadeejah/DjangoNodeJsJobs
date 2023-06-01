@@ -21,8 +21,9 @@ export async function getServerSideProps({ query }) {
 
   const keyword = query.keyword || '';
   const location = query.location || '';
+  const page = query.page || "";
 
-  const queryStr = `keyword=${keyword}&location=${location}`
+  const queryStr = `keyword=${keyword}&location=${location}&page=${page}`;
 
   const res = await axios.get(`${process.env.API_URL}/api/jobs?${queryStr}`);
 
