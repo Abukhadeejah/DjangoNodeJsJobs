@@ -9,10 +9,9 @@ import Home from '../components/Home';
 
 export default function Index({ data }) {
 
-  console.log('jobs', data);
   return (
     <Layout>
-      <Home />
+      <Home data={data}/>
     </Layout>
     
   )
