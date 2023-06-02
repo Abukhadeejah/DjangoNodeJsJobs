@@ -50,14 +50,6 @@ const Filters = () => {
     }
   }
 
-
-
-
-
-
-
-
-
   return (
     <div className="sidebar mt-5">
       <h3>Filters</h3>
