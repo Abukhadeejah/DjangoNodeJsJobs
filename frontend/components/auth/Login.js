@@ -11,7 +11,7 @@ const Login = () => {
 
   const router = useRouter();
 
-  const { loading, error, isAuthenticated } = useContext(AuthContext);
+  const { loading, error, isAuthenticated, login } = useContext(AuthContext);
 
   useEffect(() => {
     if (error) {
@@ -24,7 +24,7 @@ const Login = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    login({username: email, password});
 
   };
 
