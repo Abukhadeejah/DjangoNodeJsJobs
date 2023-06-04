@@ -3,6 +3,7 @@ import  {  useRouter } from 'next/router'
 import Image from 'next/image';
 
 import AuthContext from '../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -15,12 +16,12 @@ const Login = () => {
 
   useEffect(() => {
     if (error) {
-      console.error(error);
+      toast.error(error);
     }
   if (isAuthenticated && !loading) {
     router.push('/')
     }
-  }, { isAuthenticated, error, loading });
+  },  [isAuthenticated, error, loading]);
 
   const submitHandler = (e) => {
     e.preventDefault();

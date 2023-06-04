@@ -6,7 +6,7 @@ export default async (req, res) => {
     if (req.method === 'POST') {
         const { username, password } = req.body;
 
-        try {
+        try {   
 
             const response = await axios.post(`${process.env.API_URL}/api/token/`, {
                 username,
@@ -37,12 +37,12 @@ export default async (req, res) => {
             } else {
                 res.status(response.status).json({
                 error: "Authentication failed",    
-                });
-            }
+                    });
+                }
             
-        } catch (error) {
-            res.status(500).json({
-                error: error.response && error.response.data.detail,
+            } catch (error) {
+                res.status(error.response.status).json({
+                  error: error.response && error.response.data.error,
             
             });
         }
