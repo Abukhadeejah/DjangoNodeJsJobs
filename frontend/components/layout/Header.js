@@ -21,65 +21,17 @@ const { loading, user} = useContext(AuthContext);
           </div>
         </Link>
         <div className="btnsWrapper">
-          <Link href="/employeer/jobs/new" legacyBehavior>
+          <a href="/employeer/jobs/new" legacyBehavior>
             <button className="postAJobButton">
               <span>Post A Job</span>
             </button>
-          </Link>
+          </a>
 
-          {user ? (
-            <div className="dropdown ml-3">
-              <a
-                className="btn dropdown-toggle mr-4"
-                id="dropDownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span>Hi, {user.first_name}</span>{" "}
-              </a>
-
-              <div
-                className="dropdown-menu"
-                aria-labelledby="dropDownMenuButton"
-              >
-                <Link href="/employeer/jobs">
-                  <a className="dropdown-item">My Jobs</a>
-                </Link>
-
-                <Link href="/me/applied">
-                  <a className="dropdown-item">Jobs Applied</a>
-                </Link>
-
-                <Link href="/me">
-                  <a className="dropdown-item">Profile</a>
-                </Link>
-
-                <Link href="/upload/resume">
-                  <a className="dropdown-item">Upload Resume</a>
-                </Link>
-
-
-                <Link href="/">
-                  <a className='dropdown-item text-danger'>Logout</a>
-                </Link> 
-
-              </div>
-            </div>
-
-          ): (
-            !loading && (
-              <Link href="/login">
-                <button className="loginButtonHeader">
-                  <span>Login</span>
-                </button>
-              </Link>
-
-            )
-
-          )}
-
-          
+          <a href="/login">
+            <button className="loginButtonHeader">
+              <span>Login</span>
+            </button>
+          </a>
         </div>
       </div>
     </div>

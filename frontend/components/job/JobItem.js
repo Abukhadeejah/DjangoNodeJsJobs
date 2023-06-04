@@ -28,18 +28,20 @@ const JobItem = ({ job }) => {
             <i aria-hidden className="fas fa-briefcase"></i> {job.jobType}
           </li>
           <li>
-            <i aria-hidden className="fas fa-money-check-alt"></i>${job.salary}
+            <i aria-hidden className="fas fa-money-check-alt"></i>$
+            {job.salary}
           </li>
           <li>
-            <i aria-hidden className="far fa-clock"></i> 
-            {moment.utc(job.createdAt).local().startOf('seconds').fromNow()}
+            <i aria-hidden className="far fa-clock"></i>
+            {moment.utc(job.createdAt).local().startOf("seconds").fromNow()}
           </li>
         </ul>
       </div>
 
     </Link>)
   );
-}
+};
+
 
 export default JobItem;
 
