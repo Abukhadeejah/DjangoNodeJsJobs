@@ -46,10 +46,37 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+
+
+    // New user registeration
+    const register = async ({ firstName, lastName, email, password }) => {
+        try {
+        setLoading(true);
+
+        const res = await axios.post(`${process.env.API_URL}/api/register/`, {
+            first_name: firstName,
+            last_name: lastName,
+            email,
+            password,
+        });
+
+        if (res.data.message) {
+            setLoading(false);
+            router.push("/login");
+        }
+        } catch (error) {
+        console.log(error.response);
+        setLoading(false);
+        setError(
+            error.response &&
+            (error.response.data.detail || error.response.data.error)
+        );
+        }
+    };
+
     // Load user
     const loadUser = async () => {
-        try {
-            
+        try {            
             setLoading(true);
 
             const res = await axios.get('/api/auth/user');
@@ -72,28 +99,33 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-        // logout user
-        const logout = async () => {
-            try {
-    
-                const res = await axios.post('/api/auth/logout');
-    
-                if (res.data.success) {
-                    setIsAuthenticated(false);
-                    setUser(null)
-                }
-    
-            } catch (error) {
-                setLoading(false);
+    // Logout user
+    const logout = async () => {
+        try {
+            const res = await axios.post('/api/auth/logout');
+
+            if (res.data.success) {
                 setIsAuthenticated(false);
-                setUser(null);
-                setError(
-                    error.response && 
-                        (error.response.data.detail || error.response.data.error)
-                )
-                
+                setUser(null)
             }
-        };
+
+        } catch (error) {
+            setLoading(false);
+            setIsAuthenticated(false);
+            setUser(null);
+            setError(
+                error.response && 
+                    (error.response.data.detail || error.response.data.error)
+            )
+            
+        }
+    };
+
+    //  Clear Errors
+    const clearErrors = async () => {
+        setError(null);
+    };
+
 
     return (
         <AuthContext.Provider
@@ -103,7 +135,9 @@ export const AuthProvider = ({ children }) => {
                 error,
                 isAuthenticated,
                 login,
+                register,
                 logout,
+                clearErrors,                
             }}
         
         >

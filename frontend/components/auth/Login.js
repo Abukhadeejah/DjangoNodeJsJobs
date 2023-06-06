@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import  {  useRouter } from 'next/router'
 import Image from 'next/image';
+import Link from 'next/link';
 
 import AuthContext from '../../context/AuthContext';
 import { toast } from 'react-toastify';
@@ -12,11 +13,12 @@ const Login = () => {
 
   const router = useRouter();
 
-  const { loading, error, isAuthenticated, login } = useContext(AuthContext);
+  const { loading, error, isAuthenticated, login, clearErrors } = useContext(AuthContext);
 
   useEffect(() => {
     if (error) {
       toast.error(error);
+      clearErrors();
     }
   if (isAuthenticated && !loading) {
     router.push('/')
@@ -74,7 +76,7 @@ const Login = () => {
               </button>
             </div>
             <p style={{ textDecoration: "none" }} className="signup">
-              New to AppopoleisJobs? <a href="/register">Create an account</a>
+              New to AppopoleisJobs? <Link href="/register">Create an account</Link>
             </p>
           </form>
         </div>

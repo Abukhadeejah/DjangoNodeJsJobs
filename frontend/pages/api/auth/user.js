@@ -10,7 +10,7 @@ export default async (req, res) => {
 
         if (!access) {
             return res.status(401).json({
-                error: 'Login to load user'
+                mesage: 'Login to load user'
             })
         }
 
