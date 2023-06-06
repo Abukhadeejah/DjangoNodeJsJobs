@@ -5,8 +5,8 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [loading, setLoading] = useState();
-    const [user, setUser] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [error, setError] = useState(null);
 
@@ -54,7 +54,6 @@ export const AuthProvider = ({ children }) => {
             const res = await axios.get('/api/auth/user');
 
             if (res.data.user) {
-                loadUser();
                 setIsAuthenticated(true);
                 setLoading(false);
                 setUser(res.data.user)
