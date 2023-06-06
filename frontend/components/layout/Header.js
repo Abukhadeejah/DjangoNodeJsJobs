@@ -6,8 +6,11 @@ import AuthContext from '../../context/AuthContext';
 
 const Header = () => {
 
-const { loading, user } = useContext(AuthContext);
-// console.log(user.first_name)
+const { loading, user, logout } = useContext(AuthContext);
+
+const logoutHandler = (user) => {
+  logout();
+}
 
   return (
     <div className="navWrapper">
@@ -29,7 +32,7 @@ const { loading, user } = useContext(AuthContext);
           </Link>
 
           {user ? (
-            <div className=" btn dropdown ml-3">
+            <div className=" dropdown ml-3">
               <a 
                 className="btn dropdown-toggle mr-4"
                 id = "dropDownMenuButton"
@@ -73,7 +76,8 @@ const { loading, user } = useContext(AuthContext);
 
                 <a 
                   href="/"
-                  className='dropdown-item text-danger'        
+                  className='dropdown-item text-danger' 
+                  onClick={logoutHandler}       
                 > 
                   Logout
                 </a>
