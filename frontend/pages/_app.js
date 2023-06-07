@@ -1,10 +1,16 @@
 import '../styles/globals.css';
 import { AuthProvider } from '../context/AuthContext';
+import { JobProvider } from '../context/JobContext';
+
+
 function MyApp({ Component, pageProps }) {
   // Provide global layout or functionality here
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+        <JobProvider>
+        <Component {...pageProps} />
+        </JobProvider>
+      
     </AuthProvider>
   
   );

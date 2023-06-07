@@ -97,14 +97,14 @@ export const AuthProvider = ({ children }) => {
             setUser(res.data);
         }
         } catch (error) {
-        console.log(error.response);
-        setLoading(false);
-        setError(
-            error.response &&
-            (error.response.data.detail || error.response.data.error)
-        );
-        }
-    };
+
+            setLoading(false);
+            setError(
+                error.response &&
+                (error.response.data.detail || error.response.data.error)
+            );
+            }
+        };
 
     // Upload Resume
     const uploadResume = async (formData, access_token) => {
