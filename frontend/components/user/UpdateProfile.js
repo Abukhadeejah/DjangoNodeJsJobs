@@ -47,7 +47,6 @@ const UpdateProfile = ({ access_token }) => {
   
     const submitHandler = (e) => {
         e.preventDefault();
-    //   register({firstName, lastName, email, password});
         updateProfile({ firstName, lastName, email, password }, access_token);
   
     };
