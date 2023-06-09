@@ -12,14 +12,14 @@ mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 const JobDetails = ({ job, candidates, access_token }) => {
 
   const { applyJob, checkJobApplied, applied, clearErrors, error, loading } = useContext(JobContext);
-    
 
-    const coordinates = job.point.split("(")[1].replace(")", "").split(" ");
-    console.log(coordinates);
 
     //  Create a map and set the center point
           
     useEffect(() => {
+
+      const coordinates = job.point.split("(")[1].replace(")", "").split(" ");
+      
       const map = new mapboxgl.Map({
         container: 'job-map',
         style: 'mapbox://styles/mapbox/streets-v11',

@@ -1,56 +1,65 @@
-import React, { useState, useEffect, useContext} from 'react';
-import { toast } from 'react-toastify';
+import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-import JobContext from '../../context/JobContext';
+import JobContext from "../../context/JobContext";
 
-import { jobTypeOptions, educationOptions, industryOptions, experienceOptions } from './data';
+import {
+  jobTypeOptions,
+  educationOptions,
+  industryOptions,
+  experienceOptions,
+} from "./data";
 
 const NewJob = ({ access_token }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [jobType, setJobType] = useState("Permanent");
+  const [education, setEducation] = useState("Bachelors");
+  const [industry, setIndustry] = useState("Business");
+  const [experience, setExperience] = useState("No Experience");
+  const [salary, setSalary] = useState("");
+  const [positions, setPositions] = useState("");
+  const [company, setCompany] = useState("");
 
-    const  [title, setTitle] = useState('');
-    const  [description, setDescription] = useState('');
-    const  [email, setEmail] = useState('');
-    const  [address, setAddress] = useState('');
-    const  [jobType, setJobType] = useState('Permanent');
-    const  [education, setEducation] = useState('Bachelors');
-    const  [industry, setIndustry] = useState('Business');
-    const  [experience, setExperience] = useState('Fresher');
-    const  [salary, setSalary] = useState('');
-    const  [positions, setPositions] = useState('');
-    const  [company, setCompany] = useState('');
+  const { clearErrors, error, loading, created, newJob, setCreated } =
+    useContext(JobContext);
 
-    const { clearErrors, error, loading } = useContext(JobContext);
-
-    useEffect(() => {
-        if (error) {
-            toast.error(error);
-            clearErrors;
-        }
-    }, [error])
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        const data = {
-            title,
-            description,
-            email,
-            address,
-            jobType,
-            education,
-            industry,
-            experience,
-            salary,
-            positions,
-            company,
-        }
-
-        console.log(data);
-
-        // newJob(data, access_token)
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      clearErrors();
     }
-    
-    
+
+    if (created) {
+      setCreated(false);
+      toast.success("Job Posted successfully.");
+    }
+  }, [error, created]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    const data = {
+      title,
+      description,
+      email,
+      address,
+      jobType,
+      education,
+      industry,
+      experience,
+      salary,
+      positions,
+      company,
+    };
+
+    console.log(data);
+
+    newJob(data, access_token);
+  };
+
   return (
     <div className="newJobcontainer">
       <div className="formWrapper">
@@ -66,12 +75,13 @@ const NewJob = ({ access_token }) => {
               <div className="inputWrapper">
                 <div className="inputBox">
                   <i aria-hidden className="fab fa-tumblr"></i>
-                  <input 
-                    type="text" 
-                    placeholder="Enter Job Title" 
+                  <input
+                    type="text"
+                    placeholder="Enter Job Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    required />
+                    required
+                  />
                 </div>
                 <div className="inputBox">
                   <i aria-hidden className="fas fa-file-medical-alt"></i>
@@ -98,7 +108,13 @@ const NewJob = ({ access_token }) => {
                 </div>
                 <div className="inputBox">
                   <i aria-hidden className="fas fa-map-marker-alt"></i>
-                  <input type="text" placeholder="Enter Address" required />
+                  <input
+                    type="text"
+                    placeholder="Enter Address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                  />
                 </div>
                 <div className="inputBox">
                   <i aria-hidden className="fas fa-dollar-sign"></i>
@@ -136,16 +152,16 @@ const NewJob = ({ access_token }) => {
               <div className="boxWrapper">
                 <h4>Job Types:</h4>
                 <div className="selectWrapper">
-                  <select 
+                  <select
                     className="classic"
                     value={jobType}
-                    onChange={(e) => setJobType(e.target.value)}                    
-                    >
-                        {jobTypeOptions.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}                    
+                    onChange={(e) => setJobType(e.target.value)}
+                  >
+                    {jobTypeOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -153,16 +169,16 @@ const NewJob = ({ access_token }) => {
               <div className="boxWrapper">
                 <h4>Education:</h4>
                 <div className="selectWrapper">
-                  <select 
+                  <select
                     className="classic"
                     value={education}
-                    onChange={(e) => setEducation(e.target.value)}                    
-                    >
-                        {educationOptions.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
+                    onChange={(e) => setEducation(e.target.value)}
+                  >
+                    {educationOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -170,16 +186,16 @@ const NewJob = ({ access_token }) => {
               <div className="boxWrapper">
                 <h4>Industry:</h4>
                 <div className="selectWrapper">
-                  <select 
+                  <select
                     className="classic"
                     value={industry}
-                    onChange={(e) => setIndustry(e.target.value)}                    
-                    >
-                        {industryOptions.map((option) => (
-                                <option key={option} value={option}>
-                                    {option}
-                                </option>
-                            ))}
+                    onChange={(e) => setIndustry(e.target.value)}
+                  >
+                    {industryOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -187,30 +203,31 @@ const NewJob = ({ access_token }) => {
               <div className="boxWrapper">
                 <h4>Experience:</h4>
                 <div className="selectWrapper">
-                  <select 
+                  <select
                     className="classic"
                     value={experience}
-                    onChange={(e) => setExperience(e.target.value)}                    
-                    >
-                        {experienceOptions.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    
+                    onChange={(e) => setExperience(e.target.value)}
+                  >
+                    {experienceOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
             </div>
 
             <div className="col text-center mt-3">
-              <button className="createButton">{loading ? "Posting Job..." : "Post Job"}</button>
+              <button className="createButton">
+                {loading ? "Posting..." : "Post Job"}
+              </button>
             </div>
           </div>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NewJob
+export default NewJob;
