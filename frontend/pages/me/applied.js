@@ -1,16 +1,15 @@
 import Layout from '../../components/layout/Layout';
-// import UpdateProfile from '../../components/user/UpdateProfile';
+import JobsApplied from '../../components/job/JobsApplied';
 import axios from 'axios';
 
 import { isAuthenticatedUser } from '../../utils/isAuthenticated';
 
 
 export default function JobsAppliedPage({ jobs }) {
-    console.log(jobs)
 
   return (
     <Layout title="Jobs Applied">
-      <h1>Jobs Applied</h1>
+      <JobsApplied jobs={jobs}/>
     </Layout>
     
   )
