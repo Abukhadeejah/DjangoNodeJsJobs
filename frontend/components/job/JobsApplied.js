@@ -5,6 +5,18 @@ import DataTable from 'react-data-table-component';
 
 const JobsApplied = ({ jobs }) => {
 
+  // declare the variables hasmounted and setHasMounted to make
+  const [hasMounted, setHasMounted] = React.useState(false);
+  
+  //If react doesn't mount yet then it will return nothing. 
+  React.useEffect(() => {
+      setHasMounted(true);
+  }, []);
+
+if(!hasMounted) {
+    return null;
+}
+
   const columns = [
     {
     name: 'Job name',
