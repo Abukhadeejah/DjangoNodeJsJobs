@@ -51,6 +51,7 @@ if(!hasMounted) {
   ];
 
   const data = []
+  console.log(data)
 
   jobs && jobs.forEach((item) => {
     data.push({
