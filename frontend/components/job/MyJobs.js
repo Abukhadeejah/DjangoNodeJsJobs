@@ -39,52 +39,52 @@ const MyJobs = ({ jobs, access_token }) => {
 
   const columns = [
     {
-        name: 'Job ID',
-        sortable: true,
-        selector: (row) => row.id
+      name: 'Job ID',
+      sortable: true,
+      selector: (row) => row.id,
       },
     {
     name: 'Job name',
     sortable: true,
-    selector: (row) => row.title
+    selector: (row) => row.title,
     },
     {
       name: 'Salary',
       sortable: true,
-      selector: (row) => row.salary
+      selector: (row) => row.salary,
     },
     {
-      name: 'View Details',
+      name: 'Actions',
       sortable: true,
-      selector: (row) => row.viewJob
+      selector: (row) => row.actions,
     },
   ];
 
   const data = [];
  
   console.log(jobs)
-  jobs && jobs.forEach((item) => {
+  jobs && jobs.forEach((job) => {
     data.push({
-        id: item.job.id,
-        title: item.job.title,
-        salary: item.job.salary,
-        viewJob: (
+        id: job.id,
+        title: job.title,
+        salary: job.salary,
+        actions: (
             <>
                 <Link 
                     className='btn btn-primary'
-                    href={`/jobs/${item.job.id}`}
+                    href={`/jobs/${job.id}`}
                 >
                     <i aria-hidden className='fa fa-eye'></i>           
                 </Link>
                 <Link 
                     className='btn btn-success my-2 mx-1'
-                    href={`/employer/jobs/candidates/${item.job.id}`}
+                    href={`/employer/jobs/candidates/${job.id}`}
                 >
                     <i aria-hidden className='fa fa-users'></i>           
                 </Link>
                 <Link 
                     className='btn btn-warning my-2 mx-1'
-                    href={`/employer/jobs/${item.job.id}`}
+                    href={`/employer/jobs/${job.id}`}
                 >
                     <i aria-hidden className='fa fa-pencil'></i>           
                 </Link>

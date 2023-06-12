@@ -1,59 +1,62 @@
-import Layout from "../../../../components/layout/Layout";
-import NotFound from "../../../../components/layout/NotFound";
-import JobCandidates from "../../../../components/job/JobCandidates";
+import Layout from '../../../../components/layout/Layout';
+import JobCandidates from '../../../../components/job/JobCandidates';
+import NotFound from '../../../../components/layout/NotFound';
 
-import { isAuthenticatedUser } from "../../../../utils/isAuthenticated";
+import { isAuthenticatedUser } from '../../../../utils/isAuthenticated';
 
-import axios from "axios";
+
+import axios from 'axios';
 
 export default function JobCandidatesPage({ candidatesApplied, error }) {
+
   if (error?.includes("Not found")) return <NotFound />;
 
   return (
-    <Layout title="Job Candidates">
-      <JobCandidates candidatesApplied={candidatesApplied} />
+    <Layout title= 'Job Candidates'>
+      <JobCandidates candidatesApplied={candidatesApplied}/>
     </Layout>
-  );
+    
+  )
 }
 
 export async function getServerSideProps({ req, params }) {
-  const access_token = req.cookies.access;
 
-  const user = await isAuthenticatedUser(access_token);
+    const access_token = req.cookies.access;
 
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
+    const user = await isAuthenticatedUser(access_token);
 
-  try {
-    const res = await axios.get(
-      `${process.env.API_URL}/api/job/${params.id}/candidates/`,
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
+    if (!user) {
+      return {
+        redirect: {
+          destination: "/login",
+          permanent: false,
         },
-      }
-    );
-
+      };
+    }
+  
+  try {
+ 
+    const res = await axios.get(`${process.env.API_URL}/api/job/${params.id}/candidates/`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+  
     const candidatesApplied = res.data;
 
-    return {
-      props: {
-        candidatesApplied,
-        error: null,
-      },
-    };
+  return {
+    props: {
+     candidatesApplied,
+    },
+  };
+    
   } catch (error) {
-    console.log(error.response.data)
     return {
       props: {
         error: error.response.data.detail,
       },
+    
     };
-  }
+  } 
+    
 }
