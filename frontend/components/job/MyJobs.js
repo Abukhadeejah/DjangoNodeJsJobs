@@ -34,6 +34,11 @@ const MyJobs = ({ jobs, access_token }) => {
 
   if (!hasMounted) {
     return null;
+  } 
+
+
+  const deleteJobHandler = (id) => {
+    deleteJob(id, access_token);
   }
 
 
@@ -62,7 +67,6 @@ const MyJobs = ({ jobs, access_token }) => {
 
   const data = [];
  
-  console.log(jobs)
   jobs && jobs.forEach((job) => {
     data.push({
         id: job.id,
@@ -88,10 +92,11 @@ const MyJobs = ({ jobs, access_token }) => {
                 >
                     <i aria-hidden className='fa fa-pencil'></i>           
                 </Link>
-                <button className='btn btn-danger mx-1'>
+                <button className='btn btn-danger mx-1' onClick={() => deleteJobHandler(job.id)}>
                     <i className='fa fa-trash'></i>
 
                 </button>
+
             </>
         )
         })
